@@ -1,7 +1,7 @@
 import { IRoomUser } from "./../types/types";
 
 export class Room {
-  private static id = 0;
+  private static id = -1;
   public roomId: number;
 
   constructor(public roomUsers: IRoomUser[] = []) {

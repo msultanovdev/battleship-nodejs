@@ -6,9 +6,10 @@ export interface IRegDataType {
 
 export interface IRoomUser {
   name: string;
-  id: number;
+  index: number;
 }
 export interface IRoom {
   roomId: number;
   roomUsers: IRoomUser[];
+  addUser: (user: IRoomUser) => void;
 }

@@ -1,3 +1,5 @@
+import { addUserToRoom } from "./controllers/addUserToRoom";
+import { addShipsController } from "./controllers/addShipsController";
 import { roomController } from "./controllers/roomController";
 import { WebSocketServer } from "ws";
 import dotenv from "dotenv";
@@ -21,15 +23,26 @@ server.on("connection", (ws) => {
 
   ws.on("message", (message) => {
     const { type, data } = JSON.parse(message.toString());
-    console.log(type);
     ws_db[id] = ws;
+    console.log("type: ", type);
 
     switch (type) {
       case "reg":
         userRegistrationController(id, data);
         break;
+      case "update_room":
+        console.log("update_room: ", data);
+
       case "create_room":
         roomController(id);
+        break;
+      case "add_user_to_room":
+        if (typeof data === "string") {
+          addUserToRoom(JSON.parse(data)?.indexRoom, id);
+        }
+        break;
+      case "add_ships":
+        addShipsController(data);
         break;
     }
   });
