@@ -2,7 +2,7 @@ import { User } from "../models/User";
 import { user_db, ws_db } from "../store/store";
 import { IRegDataType } from "../types/types";
 
-export const userRegistrationController = (id: string, data: string) => {
+export const userRegistrationController = (id: number, data: string) => {
   const { name, password }: IRegDataType = JSON.parse(data);
 
   const user = user_db.some((user) => user.name === name);
